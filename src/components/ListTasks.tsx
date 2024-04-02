@@ -6,7 +6,6 @@ const ListTasks = ({ tasks, setTasks }) => {
     const [todos, setTodos] = useState([])
     const [inprogress, setInprogress] = useState([])
     const [completed, setCompleted] = useState([])
-    // use useEffect to separete tasks onto thier statues
     useEffect(() => {
         const fTodos = tasks.filter((task) => task.status === "todo")
         const fInprogress = tasks.filter((task) => task.status === "inprogress")
@@ -18,7 +17,7 @@ const ListTasks = ({ tasks, setTasks }) => {
 
     const statuses = ["todo", "inprogress", "completed"]
     return (
-        <div className='flex gap-16'>
+        <div className='flex gap-16 tablet:flex-col'>
             {
                 statuses.map((status, index) => [
                     <Section
@@ -50,9 +49,8 @@ const Section = ({
                 if (t.id === id) {
                     return { ...t, status: status }
                 }
-                return t
+                return t;
             })
-            console.log("in addItem",id)
             localStorage.setItem("Tasks", JSON.stringify(mTasks));
             toast.success(`Task added to ${status}`)
             return mTasks;
